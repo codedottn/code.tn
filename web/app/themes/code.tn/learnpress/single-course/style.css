@@ -1,0 +1,164 @@
+.ide-popup {
+	background-color: transparent;
+	cursor: pointer;
+	height: 100px;
+	line-height: 47px;
+	position: fixed;
+	right: 25px;
+	-moz-transition: all .7s ease-in-out;
+	-ms-transition: all .7s ease-in-out;
+	-o-transition: all .7s ease-in-out;
+	-webkit-transition: all .7s ease-in-out;
+	transition: all .7s ease-in-out;
+	width: 100px;
+	z-index: 9999;
+}
+
+.ide-popup:hover {
+	cursor: pointer;
+	-moz-transition: all .5s ease-in-out;
+	-ms-transition: all .5s ease-in-out;
+	-o-transition: all .5s ease-in-out;
+	-webkit-transition: all .5s ease-in-out;
+	transition: all .5s ease-in-out;
+}
+
+/* IDE Popup Styling */
+
+
+.wrapper {
+	text-align: center;
+}
+
+.wrapper h1 {
+	font-family: 'Baloo Bhaina', cursive;
+	font-size: 45px;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+}
+
+.wrapper p {
+	margin-bottom: 40px;
+	margin-top: 0;
+}
+
+/* Modal button */
+.modal-btn {
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	font-family: 'Baloo Bhaina', cursive;
+	letter-spacing: 1px;
+	outline: none;
+	padding: 10px 25px;
+	transition: all .3s;
+}
+
+.modal-btn:hover {
+	transform: scale(1.1); /* Zooms the button to 110% of its size */
+}
+
+
+/* Modal */
+.modal {
+	background-color: rgba(0, 0, 0, .65);
+	display: none;
+	height: 100%;
+	left: 0;
+	overflow: auto;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+	background-color: #e5f361;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	margin: 0 auto;
+	position: relative;
+	top: 0px;
+/ / background-color: #fff;
+	width: 600px;
+}
+
+.modal-animated-in {
+	animation: totop-in .3s ease;
+}
+
+.modal-animated-out {
+	animation: totop-out .3s ease forwards;
+}
+
+.modal-header {
+	background-color: #111;
+	height: 60px;
+	line-height: 60px;
+	padding-left: 20px;
+	width: 100%;
+}
+
+.modal-content .close {
+	background-color: #222;
+	color: #fff;
+	cursor: pointer;
+	height: 60px;
+	line-height: 60px;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: 0;
+	transition: all .3s;
+	width: 60px;
+}
+
+.modal-content .close:hover {
+	background-color: #fff;
+	color: #222;
+}
+
+/* Modal Body */
+.modal-body iframe {
+	height: 500px;
+	width: 100%;
+}
+
+/* Modal Footer */
+.modal-footer {
+	background-color: #111;
+	height: 60px;
+	line-height: 60px;
+	padding-left: 20px;
+	width: 100%;
+}
+
+.modal-header h3,
+.modal-footer h3 {
+	color: #fff;
+}
+
+/* Keyframes */
+@keyframes totop-in {
+	0% {
+		top: 600px;
+		opacity: 0;
+	}
+	100% {
+		top: 0;
+		opacity: 1;
+	}
+}
+
+@keyframes totop-out {
+	0% {
+		top: 0px;
+		opacity: 1;
+	}
+	100% {
+		top: -100%;
+		opacity: 0;
+	}
+}
+
+/* IDE Popup Styling */

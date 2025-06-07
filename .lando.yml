@@ -1,0 +1,16 @@
+name: code.tn
+recipe: wordpress
+config:
+  conf:
+    php: php.ini
+  webroot: .
+services:
+  phpmyadmin:
+    type: phpmyadmin
+    hosts:
+      - database
+  database:
+    creds:
+      user: lamp
+      password: lamp
+      database: lamp

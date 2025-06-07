@@ -1,0 +1,184 @@
+/* Accessibility Options */
+.accessibility-panel {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background: #fff;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    z-index: 9999;
+    border-radius: 5px;
+    max-width: 300px;
+    transition: all 0.3s ease;
+}
+
+.accessibility-option {
+    margin-bottom: 15px;
+}
+
+.accessibility-option button {
+    width: 100%;
+    padding: 8px 12px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.accessibility-option button:hover {
+    background: #45a049;
+}
+
+.accessibility-option select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+/* High Contrast Mode */
+.high-contrast {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+.high-contrast a {
+    color: #ffff00 !important;
+}
+
+/* Dyslexia Mode */
+.dyslexia-mode {
+    font-family: 'OpenDyslexic', sans-serif !important;
+    letter-spacing: 0.35px;
+    word-spacing: 1.2px;
+    line-height: 2;
+}
+
+/* Text Size Controls */
+.text-size-small {
+    font-size: 14px !important;
+}
+
+.text-size-medium {
+    font-size: 16px !important;
+}
+
+.text-size-large {
+    font-size: 18px !important;
+}
+
+/* Color Blind Mode */
+.color-blind-mode {
+    filter: grayscale(100%);
+}
+
+/* Keyboard Navigation */
+:focus {
+    outline: 3px solid #ff0000;
+    outline-offset: 2px;
+}
+
+/* Text-to-Speech Controls */
+.text-to-speech-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 9998;
+}
+
+.text-to-speech-controls button {
+    margin: 5px;
+    padding: 8px 12px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.text-to-speech-controls select {
+    margin-top: 10px;
+    padding: 8px;
+    width: 100%;
+}
+
+/* Accessibility Toggle Button */
+.accessibility-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4CAF50;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.accessibility-toggle:hover {
+    background: #45a049;
+    transform: scale(1.1);
+}
+
+/* Close Button */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    line-height: 1;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+/* Skip to Content Link */
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-to-content:focus {
+    top: 0;
+}
+
+/* Screen Reader Text */
+.screen-reader-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+} 
