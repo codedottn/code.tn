@@ -3,7 +3,7 @@ Contributors: thimpress, tungnx89, nhamdv, nguyenlammanh, tunnhn, phonglq.foobla
 Donate link:
 Tags: e-learning, education, course, lms, learning management system
 Tested up to: 6.8
-Stable tag: 4.2.8.4
+Stable tag: 4.2.8.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -221,6 +221,12 @@ https://www.transifex.com/projects/p/learnpress/
 13. Add-ons: Unlock endless possibilities with our add-ons from additional payment gateways to more managing course options. Tailor to your needs and easily scale as your site grow
 
 == Changelog ==
+
+= 4.2.8.5 (2025-05-21) =
+~ Fixed: missing user email in order summary table.
+~ Fixed: get related courses, set distinct, random list.
+~ Fixed: error avatar author for App API.
+~ Fixed: minor bug Block Gutenberg.
 
 = 4.2.8.4 (2025-05-08) =
 ~ Fixed: security.

@@ -2,16 +2,12 @@
  * Load all you need via AJAX
  *
  * @since 4.2.5.7
- * @version 1.0.5
+ * @version 1.0.6
  */
 
 import { lpAddQueryArgs, lpFetchAPI, listenElementCreated, lpOnElementReady, lpGetCurrentURLNoParam } from './utils.js';
-import API from './api.js';
 
 // Handle general parameter in the Frontend and Backend
-const apiData = API.admin || API.frontend;
-const urlAPI = apiData?.apiAJAX || '';
-
 let lpSettings = {};
 if ( 'undefined' !== typeof lpDataAdmin ) {
 	lpSettings = lpDataAdmin;
@@ -54,10 +50,15 @@ const lpAJAX = ( () => {
 			lpFetchAPI( url, option, callBack );
 		},
 		fetchAJAX: ( params, callBack, urlAjax = '' ) => {
-			// Call via ajax.
 			urlAjax = urlAjax || lpSettings.lpAjaxUrl;
-			if ( params.args.id_url ) {
+
+			// Set param id_url for identify.
+			if ( params.hasOwnProperty( 'args' ) && params.args.hasOwnProperty( 'id_url' ) ) {
 				urlAjax = lpAddQueryArgs( urlAjax, { id_url: params.args.id_url } );
+			}
+			// Set param lang here if exits, for detect translate
+			if ( lpSettings.urlParams.hasOwnProperty( 'lang' ) ) {
+				urlAjax = lpAddQueryArgs( urlAjax, { lang: lpSettings.urlParams.lang } );
 			}
 
 			const formData = new FormData();
@@ -83,12 +84,6 @@ const lpAJAX = ( () => {
 			if ( elements.length ) {
 				elements.forEach( ( element ) => {
 					//console.log( 'Element handing', element );
-					element.classList.add( 'loaded' );
-					let url = urlAPI;
-					if ( lpSettings.urlParams.hasOwnProperty( 'lang' ) ) {
-						url = lpAddQueryArgs( url, { lang: lpSettings.urlParams.lang } );
-					}
-
 					const elTarget = element.querySelector( `${ classLPTarget }` );
 					if ( ! elTarget ) {
 						return;
@@ -112,6 +107,7 @@ const lpAJAX = ( () => {
 							console.log( error );
 						},
 						completed: () => {
+							window.lpAJAXG.getElements();
 							//console.log( 'completed' );
 							if ( elLoadingFirst ) {
 								elLoadingFirst.remove();
@@ -119,11 +115,9 @@ const lpAJAX = ( () => {
 						},
 					};
 
-					// Call via API
-					//window.lpAJAXG.fetchAPI( url, dataSend, callBack );
-
 					// Call via AJAX
 					window.lpAJAXG.fetchAJAX( dataSend, callBack );
+					element.classList.add( 'loaded' );
 				} );
 			}
 		},
@@ -191,6 +185,12 @@ const lpAJAX = ( () => {
 			};
 
 			window.lpAJAXG.fetchAJAX( dataSend, callBack );
+		},
+		getDataSetCurrent: ( elLPTarget ) => {
+			return JSON.parse( elLPTarget.dataset.send );
+		},
+		setDataSetCurrent: ( elLPTarget, dataSend ) => {
+			return elLPTarget.dataset.send = JSON.stringify( dataSend );
 		},
 	};
 } );

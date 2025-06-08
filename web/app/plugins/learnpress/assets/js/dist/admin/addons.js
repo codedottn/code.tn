@@ -16,7 +16,7 @@ __webpack_require__.r(__webpack_exports__);
  * List API on backend
  *
  * @since 4.2.6
- * @version 1.0.1
+ * @version 1.0.2
  */
 
 const lplistAPI = {};
@@ -24,28 +24,27 @@ let lp_rest_url;
 if ('undefined' !== typeof lpDataAdmin) {
   lp_rest_url = lpDataAdmin.lp_rest_url;
   lplistAPI.admin = {
-    apiAdminNotice: lpDataAdmin.lp_rest_url + 'lp/v1/admin/tools/admin-notices',
-    apiAdminOrderStatic: lpDataAdmin.lp_rest_url + 'lp/v1/orders/statistic',
-    apiAddons: lpDataAdmin.lp_rest_url + 'lp/v1/addon/all',
-    apiAddonAction: lpDataAdmin.lp_rest_url + 'lp/v1/addon/action-n',
-    apiAddonsPurchase: lpDataAdmin.lp_rest_url + 'lp/v1/addon/info-addons-purchase',
-    apiSearchCourses: lpDataAdmin.lp_rest_url + 'lp/v1/admin/tools/search-course',
-    apiSearchUsers: lpDataAdmin.lp_rest_url + 'lp/v1/admin/tools/search-user',
-    apiAssignUserCourse: lpDataAdmin.lp_rest_url + 'lp/v1/admin/tools/assign-user-course',
-    apiUnAssignUserCourse: lpDataAdmin.lp_rest_url + 'lp/v1/admin/tools/unassign-user-course'
+    apiAdminNotice: lp_rest_url + 'lp/v1/admin/tools/admin-notices',
+    apiAdminOrderStatic: lp_rest_url + 'lp/v1/orders/statistic',
+    apiAddons: lp_rest_url + 'lp/v1/addon/all',
+    apiAddonAction: lp_rest_url + 'lp/v1/addon/action-n',
+    apiAddonsPurchase: lp_rest_url + 'lp/v1/addon/info-addons-purchase',
+    apiSearchCourses: lp_rest_url + 'lp/v1/admin/tools/search-course',
+    apiSearchUsers: lp_rest_url + 'lp/v1/admin/tools/search-user',
+    apiAssignUserCourse: lp_rest_url + 'lp/v1/admin/tools/assign-user-course',
+    apiUnAssignUserCourse: lp_rest_url + 'lp/v1/admin/tools/unassign-user-course'
   };
 }
 if ('undefined' !== typeof lpData) {
   lp_rest_url = lpData.lp_rest_url;
   lplistAPI.frontend = {
-    apiWidgets: lpData.lp_rest_url + 'lp/v1/widgets/api',
-    apiCourses: lpData.lp_rest_url + 'lp/v1/courses/archive-course',
-    apiAJAX: lpData.lp_rest_url + 'lp/v1/load_content_via_ajax/',
-    apiProfileCoverImage: lpData.lp_rest_url + 'lp/v1/profile/cover-image'
+    apiWidgets: lp_rest_url + 'lp/v1/widgets/api',
+    apiCourses: lp_rest_url + 'lp/v1/courses/archive-course',
+    apiAJAX: lp_rest_url + 'lp/v1/load_content_via_ajax/',
+    apiProfileCoverImage: lp_rest_url + 'lp/v1/profile/cover-image'
   };
 }
 if (lp_rest_url) {
-  lplistAPI.apiAJAX = lp_rest_url + 'lp/v1/load_content_via_ajax/';
   lplistAPI.apiCourses = lp_rest_url + 'lp/v1/courses/';
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (lplistAPI);

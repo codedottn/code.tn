@@ -197,7 +197,10 @@ const checkTemplatesCanLoadBlock = (templates, metadata, callBack) => {
     const metaDataNew = {
       ...metadata
     };
-    const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.select)('core/editor');
+    const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.select)('core/editor') || null;
+    if (!store || typeof store.getCurrentPostId !== 'function' || !store.getCurrentPostId()) {
+      return;
+    }
     const currentPostId = store.getCurrentPostId();
     if (currentPostId === null) {
       return;

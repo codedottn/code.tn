@@ -183,11 +183,6 @@ class SingleCourseModernLayout {
 			$user
 		);
 
-		if ( ! has_filter( 'learn-press/single-course/modern/section_left' ) ) {
-			// Do not use this hook, this hook only for handle hook without update from Addon, when handle on Addon, will remove this hook
-			$section = apply_filters( 'learn-press/single-course/offline/section-left', $section, $course, $user );
-		}
-
 		return Template::combine_components( $section );
 	}
 
@@ -274,7 +269,7 @@ class SingleCourseModernLayout {
 				'info_learning'     => $this->html_info_learning( $course, $user ),
 				//'sale_discount'       => $this->singleCourseTemplate->html_sale_discount( $course ), to do
 				'metas'             => Template::combine_components( $section_info_meta ),
-				'buttons'           => $this->html_button( $course, $user ),
+				'buttons'           => $this->html_buttons( $course, $user ),
 				'share'             => $this->html_share( $course ),
 				'featured_review'   => wp_is_mobile() ? '' : $this->singleCourseTemplate->html_feature_review( $course, $user ),
 				'sidebar'           => wp_is_mobile() ? '' : $this->singleCourseTemplate->html_sidebar( $course ),
@@ -537,9 +532,9 @@ class SingleCourseModernLayout {
 	 *
 	 * @return string
 	 * @since 4.2.8.3
-	 * @version 1.0.0
+	 * @version 1.0.1
 	 */
-	public function html_button( CourseModel $course, $user = false ): string {
+	public function html_buttons( CourseModel $course, $user = false ): string {
 		$user_id = 0;
 		if ( $user instanceof UserModel ) {
 			$user_id = $user->get_id();

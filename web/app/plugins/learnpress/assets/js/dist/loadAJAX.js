@@ -2,56 +2,6 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./assets/src/js/api.js":
-/*!******************************!*\
-  !*** ./assets/src/js/api.js ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/**
- * List API on backend
- *
- * @since 4.2.6
- * @version 1.0.1
- */
-
-const lplistAPI = {};
-let lp_rest_url;
-if ('undefined' !== typeof lpDataAdmin) {
-  lp_rest_url = lpDataAdmin.lp_rest_url;
-  lplistAPI.admin = {
-    apiAdminNotice: lpDataAdmin.lp_rest_url + 'lp/v1/admin/tools/admin-notices',
-    apiAdminOrderStatic: lpDataAdmin.lp_rest_url + 'lp/v1/orders/statistic',
-    apiAddons: lpDataAdmin.lp_rest_url + 'lp/v1/addon/all',
-    apiAddonAction: lpDataAdmin.lp_rest_url + 'lp/v1/addon/action-n',
-    apiAddonsPurchase: lpDataAdmin.lp_rest_url + 'lp/v1/addon/info-addons-purchase',
-    apiSearchCourses: lpDataAdmin.lp_rest_url + 'lp/v1/admin/tools/search-course',
-    apiSearchUsers: lpDataAdmin.lp_rest_url + 'lp/v1/admin/tools/search-user',
-    apiAssignUserCourse: lpDataAdmin.lp_rest_url + 'lp/v1/admin/tools/assign-user-course',
-    apiUnAssignUserCourse: lpDataAdmin.lp_rest_url + 'lp/v1/admin/tools/unassign-user-course'
-  };
-}
-if ('undefined' !== typeof lpData) {
-  lp_rest_url = lpData.lp_rest_url;
-  lplistAPI.frontend = {
-    apiWidgets: lpData.lp_rest_url + 'lp/v1/widgets/api',
-    apiCourses: lpData.lp_rest_url + 'lp/v1/courses/archive-course',
-    apiAJAX: lpData.lp_rest_url + 'lp/v1/load_content_via_ajax/',
-    apiProfileCoverImage: lpData.lp_rest_url + 'lp/v1/profile/cover-image'
-  };
-}
-if (lp_rest_url) {
-  lplistAPI.apiAJAX = lp_rest_url + 'lp/v1/load_content_via_ajax/';
-  lplistAPI.apiCourses = lp_rest_url + 'lp/v1/courses/';
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (lplistAPI);
-
-/***/ }),
-
 /***/ "./assets/src/js/utils.js":
 /*!********************************!*\
   !*** ./assets/src/js/utils.js ***!
@@ -308,20 +258,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ "./assets/src/js/utils.js");
-/* harmony import */ var _api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./api.js */ "./assets/src/js/api.js");
 /**
  * Load all you need via AJAX
  *
  * @since 4.2.5.7
- * @version 1.0.5
+ * @version 1.0.6
  */
 
 
 
-
 // Handle general parameter in the Frontend and Backend
-const apiData = _api_js__WEBPACK_IMPORTED_MODULE_1__["default"].admin || _api_js__WEBPACK_IMPORTED_MODULE_1__["default"].frontend;
-const urlAPI = apiData?.apiAJAX || '';
 let lpSettings = {};
 if ('undefined' !== typeof lpDataAdmin) {
   lpSettings = lpDataAdmin;
@@ -363,11 +309,18 @@ const lpAJAX = () => {
       (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.lpFetchAPI)(url, option, callBack);
     },
     fetchAJAX: (params, callBack, urlAjax = '') => {
-      // Call via ajax.
       urlAjax = urlAjax || lpSettings.lpAjaxUrl;
-      if (params.args.id_url) {
+
+      // Set param id_url for identify.
+      if (params.hasOwnProperty('args') && params.args.hasOwnProperty('id_url')) {
         urlAjax = (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.lpAddQueryArgs)(urlAjax, {
           id_url: params.args.id_url
+        });
+      }
+      // Set param lang here if exits, for detect translate
+      if (lpSettings.urlParams.hasOwnProperty('lang')) {
+        urlAjax = (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.lpAddQueryArgs)(urlAjax, {
+          lang: lpSettings.urlParams.lang
         });
       }
       const formData = new FormData();
@@ -391,13 +344,6 @@ const lpAJAX = () => {
       if (elements.length) {
         elements.forEach(element => {
           //console.log( 'Element handing', element );
-          element.classList.add('loaded');
-          let url = urlAPI;
-          if (lpSettings.urlParams.hasOwnProperty('lang')) {
-            url = (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.lpAddQueryArgs)(url, {
-              lang: lpSettings.urlParams.lang
-            });
-          }
           const elTarget = element.querySelector(`${classLPTarget}`);
           if (!elTarget) {
             return;
@@ -424,6 +370,7 @@ const lpAJAX = () => {
               console.log(error);
             },
             completed: () => {
+              window.lpAJAXG.getElements();
               //console.log( 'completed' );
               if (elLoadingFirst) {
                 elLoadingFirst.remove();
@@ -431,11 +378,9 @@ const lpAJAX = () => {
             }
           };
 
-          // Call via API
-          //window.lpAJAXG.fetchAPI( url, dataSend, callBack );
-
           // Call via AJAX
           window.lpAJAXG.fetchAJAX(dataSend, callBack);
+          element.classList.add('loaded');
         });
       }
     },
@@ -504,6 +449,12 @@ const lpAJAX = () => {
         }
       };
       window.lpAJAXG.fetchAJAX(dataSend, callBack);
+    },
+    getDataSetCurrent: elLPTarget => {
+      return JSON.parse(elLPTarget.dataset.send);
+    },
+    setDataSetCurrent: (elLPTarget, dataSend) => {
+      return elLPTarget.dataset.send = JSON.stringify(dataSend);
     }
   };
 };

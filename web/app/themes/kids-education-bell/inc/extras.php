@@ -265,7 +265,8 @@ function kids_education_bell_get_sections() {
 	            );
 	        }
 	    }
-	    return $enabled_section;
+    $enabled_section = apply_filters( 'kids_education_bell_filter_sections', $enabled_section );
+    return $enabled_section;
 	
     
 }

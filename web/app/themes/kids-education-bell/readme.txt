@@ -3,9 +3,9 @@
 Contributors: sensationaltheme
 Tags: translation-ready, custom-background, theme-options, custom-menu, threaded-comments, featured-images, footer-widgets, left-sidebar, editor-style, right-sidebar, full-width-template, two-columns, three-columns, grid-layout, custom-colors, custom-header, custom-logo, featured-image-header, blog, entertainment
 Requires at least: 4.9
-Tested up to: 6.4
+Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -72,7 +72,15 @@ Unless otherwise specified, all the theme images are created by us and licensed 
 
 == Changelog ==
 
-= 1.0.1 - November 23, 2023 =
+= 1.0.3 - December 7, 2024 =
+* Added Some CSS For Single Page
+* Added Child Theme Functions
+
+= 1.0.2 - August 30, 2024 =
+* Added Some CSS For Archive Page
+* Added Child Theme Functions
+
+= 1.0.1 - November 24, 2023 =
 * Added Some CSS For Single Page
 
 = 1.0.0 - November 10, 2023 =

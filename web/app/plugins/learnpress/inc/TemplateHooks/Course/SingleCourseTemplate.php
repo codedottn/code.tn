@@ -147,12 +147,7 @@ class SingleCourseTemplate {
 	 * @version 1.0.3
 	 */
 	public function html_categories( $course, array $setting = [] ): string {
-		$html            = '';
-		$default_setting = [
-			'is_link' => '',
-			'new_tab' => '',
-		];
-		$setting         = array_merge( $default_setting, $setting );
+		$html = '';
 
 		try {
 			if ( $course instanceof LP_Course ) {
@@ -168,7 +163,7 @@ class SingleCourseTemplate {
 				return '';
 			}
 
-			$is_link          = $setting['is_link'] ?? false;
+			$is_link          = $setting['is_link'] ?? true;
 			$attribute_target = ! empty( $setting['new_tab'] ) ? 'target="_blank"' : '';
 			$cat_names        = [];
 			foreach ( $cats as $cat ) {
@@ -328,12 +323,8 @@ class SingleCourseTemplate {
 	 * @version 1.0.2
 	 */
 	public function html_instructor( $course, bool $with_avatar = false, $setting = [] ): string {
-		$content         = '';
-		$default_setting = [
-			'is_link' => '',
-			'new_tab' => '',
-		];
-		$setting         = array_merge( $default_setting, $setting );
+		$content = '';
+
 		try {
 			$instructor = $course->get_author_model();
 			if ( ! $instructor ) {
@@ -342,9 +333,9 @@ class SingleCourseTemplate {
 
 			$singleInstructorTemplate = SingleInstructorTemplate::instance();
 			$userTemplate             = new UserTemplate( 'instructor' );
-			$is_link                  = $setting['is_link'] === 'false' ? false : true;
+			$is_link                  = $setting['is_link'] ?? true;
 			if ( $is_link ) {
-				$attribute_target = $setting['new_tab'] === 'true' ? 'target="_blank"' : '';
+				$attribute_target = ! empty( $setting['new_tab'] ) ? 'target="_blank"' : '';
 				$link_instructor  = sprintf(
 					'<a href="%s" %s >%s %s</a>',
 					$instructor->get_url_instructor(),
@@ -1163,7 +1154,7 @@ class SingleCourseTemplate {
 	 *
 	 * @return string
 	 * @since 4.2.7.2
-	 * @version 1.0.1
+	 * @version 1.0.2
 	 */
 	public function html_material( CourseModel $courseModel, $userModel = false ): string {
 		$html = '';
@@ -1172,19 +1163,22 @@ class SingleCourseTemplate {
 			$can_show = false;
 
 			if ( $userModel instanceof UserModel ) {
-				$userCourse = UserCourseModel::find( $userModel->get_id(), $courseModel->get_id(), true );
-				if ( $userCourse &&
-					( $userCourse->has_enrolled_or_finished()
-						|| $userCourse->has_purchased() ) ) {
+				if ( $courseModel->check_user_is_author( $userModel )
+					|| user_can( $courseModel->get_id(), ADMIN_ROLE ) ) {
 					$can_show = true;
-				} elseif ( $userCourse
-					&& ( $courseModel->check_user_is_author( $userModel )
-					|| user_can( $courseModel->get_id(), ADMIN_ROLE ) ) ) {
-					$can_show = true;
+				} else {
+					$userCourseModel = UserCourseModel::find( $userModel->get_id(), $courseModel->get_id(), true );
+					if ( $userCourseModel &&
+						( $userCourseModel->has_enrolled_or_finished()
+							|| $userCourseModel->has_purchased() ) ) {
+						$can_show = true;
+					}
 				}
 			} elseif ( $courseModel->has_no_enroll_requirement() ) {
 				$can_show = true;
 			}
+
+			$can_show = apply_filters( 'learn-press/course-material/can-show', $can_show, $courseModel, $userModel );
 
 			$file_per_page = LP_Settings::get_option( 'material_file_per_page', - 1 );
 			$count_files   = LP_Material_Files_DB::getInstance()->get_total( $courseModel->get_id() );

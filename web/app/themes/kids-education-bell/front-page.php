@@ -96,6 +96,24 @@ if ( 'posts' == get_option( 'show_on_front' )  || 'posts' != get_option( 'show_o
                         </div>
                     </section> 
             <?php endif; ?> 
+            <?php } elseif( $section['id'] == 'features' ) { ?>
+                <?php $disable_features_section = kids_education_bell_get_option( 'disable_features_section' );
+                if( true ==$disable_features_section): ?>
+                    <section id="<?php echo esc_attr( $section['id'] ); ?>" class="relative page-section">
+                        <div class="wrapper">
+                            <?php get_template_part( 'inc/sections/section', esc_attr( $section['id'] ) ); ?>
+                        </div>
+                    </section>
+            <?php endif; ?>
+            <?php } elseif( $section['id'] == 'team' ) { ?>
+                <?php $disable_team_section = kids_education_bell_get_option( 'disable_team_section' );
+                if( true ==$disable_team_section): ?>
+                    <section id="<?php echo esc_attr( $section['id'] );  ?>" class="relative page-section">
+                        <div class="wrapper">
+                            <?php get_template_part( 'inc/sections/section', esc_attr( $section['id'] ) ); ?>
+                        </div>
+                    </section>
+            <?php endif; ?> 
             <?php } elseif( $section['id'] == 'mustread' ) { ?>
                 <?php $disable_mustread_section = kids_education_bell_get_option( 'disable_mustread_section' );
                 if( true ==$disable_mustread_section): ?>
