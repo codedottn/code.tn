@@ -1,0 +1,9 @@
+.jitsi-wrapper {
+  max-width: 100% !important;
+}
+
+#jitsi_opt_free_domain{
+  border-radius: 50%;
+  height: 35px;
+  width: 135px;
+}

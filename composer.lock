@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d639d1514023b84522deb7be0b3377d",
+    "content-hash": "ee4a102cd5b8c48bfb86b6c07e0758b3",
     "packages": [
         {
             "name": "composer/installers",
@@ -1198,6 +1198,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/polylang/"
+        },
+        {
+            "name": "wpackagist-plugin/webinar-and-video-conference-with-jitsi-meet",
+            "version": "2.7.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/webinar-and-video-conference-with-jitsi-meet/",
+                "reference": "tags/2.7.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/webinar-and-video-conference-with-jitsi-meet.2.7.4.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/webinar-and-video-conference-with-jitsi-meet/"
         },
         {
             "name": "wpackagist-plugin/wordpress-seo",
@@ -2676,9 +2694,9 @@
     "platform": {
         "php": ">=8.1"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.1"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.6.0"
 }
