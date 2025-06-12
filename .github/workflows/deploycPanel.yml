@@ -19,5 +19,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /config/
-          local-dir: ./config/
+          server-dir: /web/app/themes/code.tn/
+          local-dir: ./web/app/themes/code.tn/
