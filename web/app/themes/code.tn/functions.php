@@ -337,3 +337,6 @@ function mytheme_child_register_blocks()
 
 add_action('init', 'mytheme_child_register_blocks');
 /* Check Synchronization */
+
+
+/*Google Calendar API */
